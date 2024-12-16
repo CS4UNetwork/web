@@ -1,0 +1,4 @@
+/assets/images/*
+  Content-Type: image/jpeg
+/assets/images/*.png
+  Content-Type: image/png
