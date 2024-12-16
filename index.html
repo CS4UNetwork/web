@@ -6,99 +6,98 @@
   <title>Welcome to [domain] | Sponsored by [sponsor]</title>
   <style>
     body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9fb;
-  color: #333;
-}
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9fb;
+      color: #333;
+    }
 
-.container {
-  max-width: 1100px;
-  margin: 20px auto;
-  padding: 20px;
-}
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 20px;
+    }
 
-/* Header */
-h1, p {
-  text-align: center;
-}
+    /* Header */
+    h1, p {
+      text-align: center;
+    }
 
-/* Banner Ad */
-#banner-ad {
-  text-align: center;
-  margin: 20px 0;
-  background-color: #e9ecef;
-  padding: 20px 0;
-}
+    /* Banner Ad */
+    #banner-ad {
+      text-align: center;
+      margin: 20px 0;
+      background-color: #e9ecef;
+      padding: 20px 0;
+    }
 
-#banner-ad img {
-  max-width: 100%;
-  height: auto;
-}
+    #banner-ad img {
+      max-width: 100%;
+      height: auto;
+    }
 
-/* Content and Sidebar */
-.content {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 20px;
-}
+    /* Content and Sidebar */
+    .content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 20px;
+    }
 
-.main-content {
-  flex: 70%;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    .main-content {
+      flex: 70%;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-/* Body Ad Section */
-.body-ad {
-  text-align: center;
-  margin: 20px 0;
-  background-color: #e9f7ef;
-  padding: 20px;
-}
+    /* Body Ad Section */
+    .body-ad {
+      text-align: center;
+      margin: 20px 0;
+      background-color: #e9f7ef;
+      padding: 20px;
+    }
 
-.body-ad img {
-  max-width: 100%;
-  height: auto;
-}
+    .body-ad img {
+      max-width: 100%;
+      height: auto;
+    }
 
-/* Sidebar Ad */
-.sidebar {
-  flex: 28%;
-  text-align: center;
+    /* Sidebar Ad */
+    .sidebar {
+      flex: 28%;
+      text-align: center;
+      background-color: #e9ecef;
+      padding: 20px;
+    }
 
-  background-color: #e9ecef;
-  padding: 20px;
-}
+    .sidebar img {
+      max-width: 100%;
+      height: auto;
+    }
 
-.sidebar img {
-  max-width: 100%;
-  height: auto;
-}
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #777;
+    }
 
-/* Footer */
-footer {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 0.9rem;
-  color: #777;
-}
+    a {
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+      font-weight: bold;
+      color: #007BFF;
+      text-decoration: none;
+    }
 
-a {
-  display: block;
-  text-align: center;
-  margin: 20px 0;
-  font-weight: bold;
-  color: #007BFF;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -106,10 +105,10 @@ a:hover {
    <!-- Dynamic Welcome Section -->
    <h1 id="welcome-message">Welcome to [website]</h1>
    <p id="sponsor-message">Sponsored by [sponsor]</p>
+
     <!-- Banner Ad Section -->
     <div id="banner-ad">
-      <!-- Banner ad content will be loaded here -->
-      Loading banner ad...
+      <img src="/assets/banner.png" alt="Banner Ad">
     </div>
 
     <!-- Content and Sidebar -->
@@ -120,15 +119,13 @@ a:hover {
 
         <!-- Body Ad Section -->
         <div class="body-ad" id="body-ad">
-          <!-- Body ad content will be loaded here -->
-          Loading body ad...
+          <img src="/assets/body.png" alt="Body Ad">
         </div>
       </div>
 
       <!-- Sidebar Ad -->
       <div class="sidebar" id="sidebar-ad">
-        <!-- Sidebar ad content will be loaded here -->
-        Loading sidebar ad...
+        <img src="/assets/sidebar.png" alt="Sidebar Ad">
       </div>
     </div>
 
@@ -140,83 +137,52 @@ a:hover {
     </footer>
   </div>
 
-  <!-- Load External Ad Content -->
+  <!-- Load Dynamic Content -->
   <script>
-    // Function to load content into ad elements
-    function loadAdContent() {
-      fetch('ad-content.html')
-        .then(response => response.text())
-        .then(data => {
-          // Load banner ad
-          document.getElementById('banner-ad').innerHTML = data.split('<!-- BANNER-AD -->')[1];
-          // Load sidebar ad
-          document.getElementById('sidebar-ad').innerHTML = data.split('<!-- SIDEBAR-AD -->')[1];
-          // Load body ad
-          document.getElementById('body-ad').innerHTML = data.split('<!-- BODY-AD -->')[1];
-        })
-        .catch(() => {
-          document.getElementById('banner-ad').innerHTML = "Error loading banner ad.";
-          document.getElementById('sidebar-ad').innerHTML = "Error loading sidebar ad.";
-          document.getElementById('body-ad').innerHTML = "Error loading body ad.";
-        });
+    // Load the JSON file and update the page dynamically
+    async function updateWebsiteContent() {
+        try {
+            const domain = window.location.hostname;
+
+            const response = await fetch('/ads.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            const sponsor = data.sponsor || 'Your Sponsor';
+
+            const baseTitle = `Welcome to ${domain} | Sponsored by ${sponsor}`;
+            document.title = baseTitle;
+
+            let scrollIndex = 0;
+            function scrollTitle() {
+                document.title = baseTitle.slice(scrollIndex) + " " + baseTitle.slice(0, scrollIndex);
+                scrollIndex = (scrollIndex + 1) % baseTitle.length;
+            }
+            setInterval(scrollTitle, 200);
+
+            const welcomeMessage = document.getElementById('welcome-message');
+            if (welcomeMessage) {
+                welcomeMessage.textContent = `Welcome to ${domain}`;
+            }
+
+            const sponsorMessage = document.getElementById('sponsor-message');
+            if (sponsorMessage) {
+                sponsorMessage.textContent = `Sponsored by ${sponsor}`;
+            }
+
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.innerHTML = `&copy; ${new Date().getFullYear()} ${domain}. Sponsored by <strong>${sponsor}</strong> | Ads by <strong>ParkSpot Media</strong>`;
+            }
+        } catch (error) {
+            console.error('Error loading ads.json:', error);
+        }
     }
-    loadAdContent();
 
-  // Load the JSON file and update the page dynamically
-async function updateWebsiteContent() {
-    try {
-        // Get the domain name dynamically from the host
-        const domain = window.location.hostname;
-
-        // Fetch the ads.json file
-        const response = await fetch('/ads.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        // Extract the sponsor information
-        const sponsor = data.sponsor || 'Your Sponsor';
-
-        // Update the page title
-        const baseTitle = `Welcome to ${domain} | Sponsored by ${sponsor}`;
-        document.title = baseTitle;
-
-        // Add scrolling effect to the title
-        let scrollIndex = 0;
-        function scrollTitle() {
-            document.title = baseTitle.slice(scrollIndex) + " " + baseTitle.slice(0, scrollIndex);
-            scrollIndex = (scrollIndex + 1) % baseTitle.length;
-        }
-        setInterval(scrollTitle, 200);
-
-        // Update the welcome message
-        const welcomeMessage = document.getElementById('welcome-message');
-        if (welcomeMessage) {
-            welcomeMessage.textContent = `Welcome to ${domain}`;
-        }
-
-        // Update the sponsor message
-        const sponsorMessage = document.getElementById('sponsor-message');
-        if (sponsorMessage) {
-            sponsorMessage.textContent = `Sponsored by ${sponsor}`;
-        }
-
-        // Update the footer content
-        const footer = document.querySelector('footer');
-        if (footer) {
-            footer.innerHTML = `&copy; ${new Date().getFullYear()} ${domain}. Sponsored by <strong>${sponsor}</strong> | Ads by <strong>ParkSpot Media</strong>`;        }
-    } catch (error) {
-        console.error('Error loading ads.json:', error);
-    }
-}
-
-// Call the function when the page loads
-window.addEventListener('DOMContentLoaded', updateWebsiteContent);
-
+    window.addEventListener('DOMContentLoaded', updateWebsiteContent);
   </script>
 </body>
 </html>
-
-
