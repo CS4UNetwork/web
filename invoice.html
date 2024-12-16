@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #007BFF;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        table th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        .total {
+            text-align: right;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-box">
+        <h1>Invoice</h1>
+        <p><strong>Date:</strong> [DATE]</p>
+        <p><strong>Invoice Number:</strong> #INV-[UNIQUE ID]</p>
+
+        <h2>Gecku Labs</h2>
+        <p>
+            <strong>Billed To:</strong><br>
+            [Advertiser's Name] <br>
+            [Company Name] <br>
+            [Contact Email] <br>
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Domain</th>
+                    <th>Ad Type</th>
+                    <th>Duration</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ad Placement on [Domain Name]</td>
+                    <td>[Domain Name]</td>
+                    <td>Top Banner Ad</td>
+                    <td>1 Month</td>
+                    <td>$100</td>
+                </tr>
+                <tr>
+                    <td>Custom Sponsored Post</td>
+                    <td>[Domain Name]</td>
+                    <td>Sponsored Content</td>
+                    <td>1 Post</td>
+                    <td>$150</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="total"><strong>Total: $250</strong></p>
+
+        <p><strong>Payment Information:</strong></p>
+        <ul>
+            <li>Bank Transfer: Account #123456789, Routing #987654321</li>
+            <li>PayPal: ads@gecku.net</li>
+            <li>Venmo: @geckulabs</li>
+        </ul>
+
+        <footer>
+            Thank you for advertising with us! For inquiries, contact us at <a href="mailto:ads@gecku.net">ads@gecku.net</a>.
+        </footer>
+    </div>
+</body>
+</html>
